@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   # Development Service: Next.js dev server with hot reload
@@ -8,14 +7,14 @@ services:
       dockerfile: Dockerfile.dev
     container_name: startpage-dev
     ports:
-      - "3000:3000"
+      - "7774:7774"
     volumes:
       - ./app:/app
       - /app/node_modules
       - /app/.next
     environment:
       - NODE_ENV=development
-      - PORT=3000
+      - PORT=7774
       - WATCHPACK_POLLING=true # Essential for hot reloading in Docker on Windows/WSL2
     restart: always
 
@@ -26,10 +25,16 @@ services:
       dockerfile: Dockerfile.prod
     container_name: startpage-prod
     ports:
-      - "8080:3000"
+      - "8080:7774"
     volumes:
       - ./data:/app/data
     environment:
       - NODE_ENV=production
       - DATABASE_DIR=/app/data
     restart: always
+
+networks:
+  default:
+    name: web
+    external: true
+

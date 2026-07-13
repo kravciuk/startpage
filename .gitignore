@@ -1,0 +1,9 @@
+# dependencies
+app/node_modules/
+
+# next.js build cache
+app/.next/
+
+# static export output
+app/out/
+app/data/

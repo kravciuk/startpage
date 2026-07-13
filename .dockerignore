@@ -1,0 +1,30 @@
+# Dependencies
+**/node_modules
+**/.next
+**/out
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose.yml
+Dockerfile.dev
+Dockerfile.prod
+
+# Documentation and temporary files
+tech-spec.md
+README.md
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -42,6 +42,7 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
 
   const handleMenuClick = (e) => {
     e.stopPropagation();
+    e.preventDefault();
     if (!showMenu && menuBtnRef.current) {
       const rect = menuBtnRef.current.getBoundingClientRect();
       setMenuPos({ top: rect.bottom + 4, left: rect.right - 140 });
@@ -51,12 +52,14 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
 
   const handleEdit = (e) => {
     e.stopPropagation();
+    e.preventDefault();
     setShowMenu(false);
     onEdit(link);
   };
 
   const handleDelete = (e) => {
     e.stopPropagation();
+    e.preventDefault();
     setShowMenu(false);
     onDelete(link.id);
   };
@@ -165,7 +168,7 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
         <>
           <div
             className="fixed inset-0 z-40"
-            onClick={() => setShowMenu(false)}
+            onClick={(e) => { e.stopPropagation(); setShowMenu(false); }}
           />
           <div
             className="fixed z-50 min-w-[140px] bg-bg-dropdown border border-border-subtle rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.4)] py-1.5 animate-scale-in"

@@ -3,13 +3,16 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical, MoreVertical, Pencil, Trash2 } from 'lucide-react';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { cn } from '@/lib/utils';
 
 export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
   const [showMenu, setShowMenu] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [menuPos, setMenuPos] = useState({ top: 0, left: 0 });
+  const menuBtnRef = useRef(null);
 
   const {
     attributes,
@@ -39,6 +42,10 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
 
   const handleMenuClick = (e) => {
     e.stopPropagation();
+    if (!showMenu && menuBtnRef.current) {
+      const rect = menuBtnRef.current.getBoundingClientRect();
+      setMenuPos({ top: rect.bottom + 4, left: rect.right - 140 });
+    }
     setShowMenu(!showMenu);
   };
 
@@ -142,6 +149,7 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
 
       {/* Menu Button */}
       <button
+        ref={menuBtnRef}
         onClick={handleMenuClick}
         className={cn(
           'p-1 rounded-md transition-all',
@@ -153,13 +161,16 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
       </button>
 
       {/* Dropdown Menu */}
-      {showMenu && (
+      {showMenu && createPortal(
         <>
-          <div 
-            className="fixed inset-0 z-40" 
-            onClick={() => setShowMenu(false)} 
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setShowMenu(false)}
           />
-          <div className="absolute right-0 top-full mt-1 z-50 min-w-[140px] bg-bg-dropdown border border-border-subtle rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.4)] py-1.5 animate-scale-in">
+          <div
+            className="fixed z-50 min-w-[140px] bg-bg-dropdown border border-border-subtle rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.4)] py-1.5 animate-scale-in"
+            style={{ top: menuPos.top, left: menuPos.left }}
+          >
             <button
               onClick={handleEdit}
               className="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] text-text-primary hover:bg-white/5 transition-colors"
@@ -175,7 +186,8 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
               Удалить
             </button>
           </div>
-        </>
+        </>,
+        document.body
       )}
     </div>
   );

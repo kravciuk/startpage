@@ -15,22 +15,22 @@ RUN npm ci
 # Copy application source code
 COPY app/ ./
 
-# Run Next.js production build (compiles JS/JSX and API routes)
+# Run Next.js production build
 RUN npm run build
 
-# Stage 2: Runner stage
-FROM node:20-alpine AS runner
+# Stage 2: Runner stage (same Node version as builder for ABI compatibility)
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 
-# Install build tools temporarily to compile better-sqlite3 native bindings for production
+# Install build tools temporarily to compile better-sqlite3 native bindings
 RUN apk add --no-cache python3 make g++
 
 # Copy package files
 COPY app/package*.json ./
 
-# Install only production dependencies and clean up build tools afterwards
-RUN npm ci --only=production && \
+# Install production deps then remove build tools
+RUN npm ci --omit=dev && \
     apk del python3 make g++
 
 # Copy built application files
@@ -49,4 +49,4 @@ ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 ENV DATABASE_DIR="/app/data"
 
-CMD ["npm", "run", "start"]
+CMD ["node", "node_modules/next/dist/bin/next", "start"]

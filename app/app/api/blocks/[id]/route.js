@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { getDb } from '@/lib/db';
 
 // PATCH /api/blocks/[id] - Update a block
 export async function PATCH(request, { params }) {
   try {
+    const db = getDb();
     const id = parseInt(params.id);
     const { name, cards_per_row } = await request.json();
 
@@ -30,6 +31,7 @@ export async function PATCH(request, { params }) {
 // DELETE /api/blocks/[id] - Delete a block and its links (cascaded automatically by SQLite foreign key ON DELETE CASCADE)
 export async function DELETE(request, { params }) {
   try {
+    const db = getDb();
     const id = parseInt(params.id);
 
     const result = db.prepare('DELETE FROM blocks WHERE id = ?').run(id);

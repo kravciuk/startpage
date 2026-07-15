@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { getDb } from '@/lib/db';
 
 // PATCH /api/links/[id] - Update a link
 export async function PATCH(request, { params }) {
   try {
+    const db = getDb();
     const id = parseInt(params.id);
     const body = await request.json();
     const { title, url, favicon_path } = body;
@@ -49,6 +50,7 @@ export async function PATCH(request, { params }) {
 // DELETE /api/links/[id] - Delete a link
 export async function DELETE(request, { params }) {
   try {
+    const db = getDb();
     const id = parseInt(params.id);
 
     const result = db.prepare('DELETE FROM links WHERE id = ?').run(id);

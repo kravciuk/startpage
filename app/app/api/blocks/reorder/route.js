@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { getDb } from '@/lib/db';
 
 // POST /api/blocks/reorder - Update blocks sort order
 export async function POST(request) {
   try {
+    const db = getDb();
     const { blockIds } = await request.json();
     if (!Array.isArray(blockIds)) {
       return NextResponse.json({ error: 'blockIds must be an array' }, { status: 400 });

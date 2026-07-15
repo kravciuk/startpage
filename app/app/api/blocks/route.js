@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { getDb } from '@/lib/db';
 
 // GET /api/blocks - Fetch all blocks with their links
 export async function GET() {
   try {
+    const db = getDb();
     const blocks = db.prepare('SELECT * FROM blocks ORDER BY sort_order ASC').all();
     const links = db.prepare('SELECT * FROM links ORDER BY sort_order ASC').all();
 
@@ -25,6 +26,7 @@ export async function GET() {
 // POST /api/blocks - Create a new block
 export async function POST(request) {
   try {
+    const db = getDb();
     const { name, cards_per_row } = await request.json();
     if (!name) {
       return NextResponse.json({ error: 'Name is required' }, { status: 400 });

@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { getDb } from '@/lib/db';
 
 // POST /api/links - Create a new link inside a block
 export async function POST(request) {
   try {
+    const db = getDb();
     const { blockId, title, url } = await request.json();
 
     if (!blockId || !title || !url) {

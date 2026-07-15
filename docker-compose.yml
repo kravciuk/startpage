@@ -25,11 +25,12 @@ services:
       dockerfile: Dockerfile.prod
     container_name: startpage-prod
     ports:
-      - "8080:7774"
+      - "7774:7774"
     volumes:
       - ./data:/app/data
       - ./app:/app
     environment:
+      - PORT=7774
       - NODE_ENV=production
       - DATABASE_DIR=/app/data
     restart: always

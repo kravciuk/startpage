@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
+import { getDb } from '@/lib/db';
 
 // POST /api/links/reorder - Reorder links in a target block (handles both intra-block sort and inter-block movement)
 export async function POST(request) {
   try {
+    const db = getDb();
     const { orderedIds, targetBlockId } = await request.json();
 
     if (!Array.isArray(orderedIds) || !targetBlockId) {

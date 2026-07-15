@@ -1,8 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'StartPage — Быстрый доступ',
-  description: 'Стартовая страница с закреплёнными ссылками',
+  title: 'StartPage — Quick Access',
+  description: 'Start page with pinned links',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 }
 

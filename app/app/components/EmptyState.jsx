@@ -7,10 +7,10 @@ export default function EmptyState({ onCreateBlock }) {
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
       <LayoutGrid className="w-16 h-16 text-text-muted" />
       <p className="text-base text-text-secondary">
-        У вас пока нет блоков быстрого доступа
+        No quick access blocks yet
       </p>
       <p className="text-sm text-text-muted">
-        Создайте первый блок, чтобы начать
+        Create your first block to get started
       </p>
       <button
         onClick={onCreateBlock}
@@ -22,7 +22,7 @@ export default function EmptyState({ onCreateBlock }) {
         "
       >
         <Plus className="w-4 h-4" />
-        Создать блок
+        Create block
       </button>
     </div>
   );

@@ -9,7 +9,7 @@ const INITIAL_DATA = {
   blocks: [
     {
       id: 1,
-      name: 'AI Сервисы',
+      name: 'AI Services',
       sort_order: 0,
       links: [
         { id: 1, block_id: 1, title: 'ChatGPT', url: 'https://chatgpt.com', favicon_path: null, sort_order: 0 },

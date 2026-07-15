@@ -179,14 +179,14 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
               className="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] text-text-primary hover:bg-white/5 transition-colors"
             >
               <Pencil className="w-3.5 h-3.5" />
-              Редактировать
+              Edit
             </button>
             <button
               onClick={handleDelete}
               className="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] text-danger hover:bg-white/5 transition-colors"
             >
               <Trash2 className="w-3.5 h-3.5" />
-              Удалить
+              Delete
             </button>
           </div>
         </>,

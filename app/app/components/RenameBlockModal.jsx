@@ -45,7 +45,7 @@ export default function RenameBlockModal({ isOpen, onClose, onSubmit, block }) {
       <div className="relative w-full max-w-[420px] mx-4 bg-bg-block border border-border-subtle rounded-2xl p-6 animate-scale-in">
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-semibold text-text-primary">Переименовать блок</h2>
+          <h2 className="text-lg font-semibold text-text-primary">Rename block</h2>
           <button
             onClick={onClose}
             className="p-1 rounded-md hover:bg-white/5 transition-colors"
@@ -58,13 +58,13 @@ export default function RenameBlockModal({ isOpen, onClose, onSubmit, block }) {
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <label className="block text-sm text-text-secondary mb-2">
-              Название блока
+              Block name
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Название блока"
+              placeholder="Block name"
               autoFocus
               className="
                 w-full h-11 px-4 rounded-xl
@@ -78,7 +78,7 @@ export default function RenameBlockModal({ isOpen, onClose, onSubmit, block }) {
 
           <div className="mb-5">
             <label className="block text-sm text-text-secondary mb-2">
-              Карточек в строке
+              Cards per row
             </label>
             <input
               type="number"
@@ -107,7 +107,7 @@ export default function RenameBlockModal({ isOpen, onClose, onSubmit, block }) {
                 hover:bg-white/5 transition-colors
               "
             >
-              Отмена
+              Cancel
             </button>
             <button
               type="submit"
@@ -119,7 +119,7 @@ export default function RenameBlockModal({ isOpen, onClose, onSubmit, block }) {
                 disabled:opacity-50 disabled:cursor-not-allowed
               "
             >
-              {isSubmitting ? 'Сохранение...' : 'Сохранить'}
+              {isSubmitting ? 'Saving...' : 'Save'}
             </button>
           </div>
         </form>

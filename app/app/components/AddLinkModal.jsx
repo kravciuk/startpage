@@ -56,7 +56,7 @@ export default function AddLinkModal({ isOpen, onClose, onSubmit, editLink = nul
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-lg font-semibold text-text-primary">
-            {isEditing ? 'Редактировать ссылку' : 'Добавить ссылку'}
+            {isEditing ? 'Edit link' : 'Add link'}
           </h2>
           <button
             onClick={onClose}
@@ -71,13 +71,13 @@ export default function AddLinkModal({ isOpen, onClose, onSubmit, editLink = nul
           <div className="space-y-4 mb-5">
             <div>
               <label className="block text-sm text-text-secondary mb-2">
-                Название сайта
+                Site name
               </label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Например: Google"
+                placeholder="e.g. Google"
                 autoFocus
                 className="
                   w-full h-11 px-4 rounded-xl
@@ -91,7 +91,7 @@ export default function AddLinkModal({ isOpen, onClose, onSubmit, editLink = nul
             
             <div>
               <label className="block text-sm text-text-secondary mb-2">
-                Адрес сайта
+                Site URL
               </label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted text-sm select-none">
@@ -125,7 +125,7 @@ export default function AddLinkModal({ isOpen, onClose, onSubmit, editLink = nul
                 hover:bg-white/5 transition-colors
               "
             >
-              Отмена
+              Cancel
             </button>
             <button
               type="submit"
@@ -137,7 +137,7 @@ export default function AddLinkModal({ isOpen, onClose, onSubmit, editLink = nul
                 disabled:opacity-50 disabled:cursor-not-allowed
               "
             >
-              {isSubmitting ? 'Сохранение...' : (isEditing ? 'Сохранить' : 'Добавить')}
+              {isSubmitting ? 'Saving...' : (isEditing ? 'Save' : 'Add')}
             </button>
           </div>
         </form>

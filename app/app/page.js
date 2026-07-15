@@ -70,7 +70,7 @@ export default function Home() {
   };
 
   const handleDeleteBlock = (blockId) => {
-    if (!confirm('Удалить этот блок и все ссылки в нём?')) return;
+    if (!confirm('Delete this block and all links in it?')) return;
     deleteBlock(blockId);
   };
 
@@ -111,7 +111,7 @@ export default function Home() {
   };
 
   const handleDeleteLink = (linkId) => {
-    if (!confirm('Удалить эту ссылку?')) return;
+    if (!confirm('Delete this link?')) return;
     deleteLink(linkId);
   };
 

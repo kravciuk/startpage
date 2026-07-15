@@ -40,7 +40,7 @@ export default function AddBlockModal({ isOpen, onClose, onSubmit }) {
       <div className="relative w-full max-w-[420px] mx-4 bg-bg-block border border-border-subtle rounded-2xl p-6 animate-scale-in">
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-semibold text-text-primary">Новый блок</h2>
+          <h2 className="text-lg font-semibold text-text-primary">New block</h2>
           <button
             onClick={onClose}
             className="p-1 rounded-md hover:bg-white/5 transition-colors"
@@ -53,13 +53,13 @@ export default function AddBlockModal({ isOpen, onClose, onSubmit }) {
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <label className="block text-sm text-text-secondary mb-2">
-              Название блока
+              Block name
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Например: Работа"
+              placeholder="e.g. Work"
               autoFocus
               className="
                 w-full h-11 px-4 rounded-xl
@@ -73,7 +73,7 @@ export default function AddBlockModal({ isOpen, onClose, onSubmit }) {
 
           <div className="mb-5">
             <label className="block text-sm text-text-secondary mb-2">
-              Карточек в строке
+              Cards per row
             </label>
             <input
               type="number"
@@ -102,7 +102,7 @@ export default function AddBlockModal({ isOpen, onClose, onSubmit }) {
                 hover:bg-white/5 transition-colors
               "
             >
-              Отмена
+              Cancel
             </button>
             <button
               type="submit"
@@ -114,7 +114,7 @@ export default function AddBlockModal({ isOpen, onClose, onSubmit }) {
                 disabled:opacity-50 disabled:cursor-not-allowed
               "
             >
-              {isSubmitting ? 'Создание...' : 'Создать'}
+              {isSubmitting ? 'Creating...' : 'Create'}
             </button>
           </div>
         </form>

@@ -14,7 +14,7 @@ export default function AddLinkButton({ onClick }) {
       "
     >
       <Plus className="w-4 h-4" />
-      <span className="text-[13px]">Добавить</span>
+      <span className="text-[13px]">Add</span>
     </button>
   );
 }

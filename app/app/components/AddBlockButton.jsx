@@ -16,7 +16,7 @@ export default function AddBlockButton({ onClick, className = '' }) {
       `}
       >
       <PlusCircle className="w-8 h-8" />
-      <span className="text-sm font-medium">Новый блок</span>
+      <span className="text-sm font-medium">New block</span>
     </button>
   );
 }

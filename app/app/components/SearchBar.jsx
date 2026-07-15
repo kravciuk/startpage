@@ -39,7 +39,7 @@ export default function SearchBar({ onSearch }) {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder="Поиск по названию или адресу..."
+          placeholder="Search by name or URL..."
           className="
             w-full h-full bg-transparent pl-11 pr-10
             text-[15px] text-text-primary placeholder-text-muted

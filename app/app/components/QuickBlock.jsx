@@ -128,7 +128,7 @@ export default function QuickBlock({
         >
           <div
             className="grid gap-1.5"
-            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}
+            style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}
           >
             {block.links.map((link) => (
               <LinkCard

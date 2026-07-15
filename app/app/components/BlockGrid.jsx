@@ -36,7 +36,7 @@ export default function BlockGrid({
   const [activeData, setActiveData] = useState(null);
 
   const blockCount = blocks.length;
-  const desktopCols = Math.min(Math.max(blockCount, 1), 4);
+  const desktopCols = Math.min(Math.max(blockCount, 1), 3);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {

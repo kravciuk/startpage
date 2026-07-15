@@ -4,7 +4,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable';
 import { MoreHorizontal, Pencil, Trash2, GripVertical } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import LinkCard from './LinkCard';
 import AddLinkButton from './AddLinkButton';
@@ -20,6 +20,14 @@ export default function QuickBlock({
 }) {
   const [showMenu, setShowMenu] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const {
     attributes,
@@ -127,8 +135,8 @@ export default function QuickBlock({
           strategy={rectSortingStrategy}
         >
           <div
-            className="grid gap-1.5 overflow-hidden w-full"
-            style={{ gridTemplateColumns: `repeat(${block.cards_per_row || 2}, 1fr)` }}
+            className="grid gap-1.5 w-full"
+            style={{ gridTemplateColumns: `repeat(${isMobile ? Math.min(block.cards_per_row || 2, 2) : (block.cards_per_row || 2)}, minmax(0, 1fr))` }}
           >
             {block.links.map((link) => (
               <LinkCard

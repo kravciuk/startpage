@@ -187,19 +187,26 @@ export default function BlockGrid({
       >
         <div className="flex flex-col gap-5">
           {rows.map((row, rowIndex) => (
-            <div key={rowIndex} className="flex items-stretch gap-5">
-              {row.map((block) => (
-                <div key={block.id} className="flex-auto min-w-0 flex flex-col">
-                  <QuickBlock
-                    block={block}
-                    onEditLink={onEditLink}
-                    onDeleteLink={onDeleteLink}
-                    onAddLink={onAddLink}
-                    onRenameBlock={onRenameBlock}
-                    onDeleteBlock={onDeleteBlock}
-                  />
-                </div>
-              ))}
+            <div key={rowIndex} className="flex flex-col sm:flex-row items-stretch gap-5">
+              {row.map((block) => {
+                const cards = block.cards_per_row || 2;
+                return (
+                  <div
+                    key={block.id}
+                    className="flex flex-col min-w-0 w-full sm:w-auto"
+                    style={{ flex: `${cards} 1 0` }}
+                  >
+                    <QuickBlock
+                      block={block}
+                      onEditLink={onEditLink}
+                      onDeleteLink={onDeleteLink}
+                      onAddLink={onAddLink}
+                      onRenameBlock={onRenameBlock}
+                      onDeleteBlock={onDeleteBlock}
+                    />
+                  </div>
+                );
+              })}
             </div>
           ))}
           <AddBlockButton onClick={onAddBlock} />

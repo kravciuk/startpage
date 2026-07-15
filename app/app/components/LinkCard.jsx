@@ -95,7 +95,7 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
       ref={setNodeRef}
       style={style}
       className={cn(
-        'group relative flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer',
+        'group relative flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer overflow-hidden',
         'transition-all duration-150',
         'hover:bg-white/[0.03]',
         isDragging && 'opacity-50 border border-dashed border-accent',
@@ -155,7 +155,7 @@ export default function LinkCard({ link, onEdit, onDelete, isOverlay }) {
         ref={menuBtnRef}
         onClick={handleMenuClick}
         className={cn(
-          'p-1 rounded-md transition-all',
+          'p-1 rounded-md transition-all flex-shrink-0',
           isHovered ? 'opacity-100' : 'opacity-0',
           'hover:bg-white/5'
         )}

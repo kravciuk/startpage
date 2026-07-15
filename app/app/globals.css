@@ -105,6 +105,16 @@ body {
   animation: scaleIn 0.2s ease-out forwards;
 }
 
+/* Link grid: 2 cols max on mobile, cards_per_row on desktop */
+.link-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 640px) {
+  .link-grid {
+    grid-template-columns: repeat(var(--cards-per-row, 2), minmax(0, 1fr));
+  }
+}
+
 /* Drag styles */
 .dragging {
   opacity: 0.7;

@@ -5,6 +5,7 @@ import { X } from 'lucide-react';
 
 export default function AddBlockModal({ isOpen, onClose, onSubmit }) {
   const [name, setName] = useState('');
+  const [cardsPerRow, setCardsPerRow] = useState(2);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isOpen) return null;
@@ -12,11 +13,12 @@ export default function AddBlockModal({ isOpen, onClose, onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name.trim() || isSubmitting) return;
-    
+
     setIsSubmitting(true);
-    await onSubmit(name.trim());
+    await onSubmit(name.trim(), cardsPerRow);
     setIsSubmitting(false);
     setName('');
+    setCardsPerRow(2);
     onClose();
   };
 
@@ -59,6 +61,26 @@ export default function AddBlockModal({ isOpen, onClose, onSubmit }) {
               onChange={(e) => setName(e.target.value)}
               placeholder="Например: Работа"
               autoFocus
+              className="
+                w-full h-11 px-4 rounded-xl
+                bg-bg-input border border-border-subtle
+                text-text-primary placeholder-text-muted
+                focus:outline-none focus:border-accent focus:shadow-[0_0_0_3px_rgba(79,70,229,0.15)]
+                transition-all
+              "
+            />
+          </div>
+
+          <div className="mb-5">
+            <label className="block text-sm text-text-secondary mb-2">
+              Карточек в строке
+            </label>
+            <input
+              type="number"
+              min="1"
+              max="4"
+              value={cardsPerRow}
+              onChange={(e) => setCardsPerRow(Math.min(Math.max(parseInt(e.target.value) || 1, 1), 4))}
               className="
                 w-full h-11 px-4 rounded-xl
                 bg-bg-input border border-border-subtle

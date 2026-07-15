@@ -102,7 +102,7 @@ export default function QuickBlock({
                   className="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] text-text-primary hover:bg-white/5 transition-colors"
                 >
                   <Pencil className="w-3.5 h-3.5" />
-                  Переименовать
+                  Редактировать
                 </button>
                 <button
                   onClick={() => {
@@ -128,7 +128,7 @@ export default function QuickBlock({
         >
           <div
             className="grid gap-1.5"
-            style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}
+            style={{ gridTemplateColumns: `repeat(${block.cards_per_row || 2}, 1fr)` }}
           >
             {block.links.map((link) => (
               <LinkCard

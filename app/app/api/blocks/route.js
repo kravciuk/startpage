@@ -25,22 +25,25 @@ export async function GET() {
 // POST /api/blocks - Create a new block
 export async function POST(request) {
   try {
-    const { name } = await request.json();
+    const { name, cards_per_row } = await request.json();
     if (!name) {
       return NextResponse.json({ error: 'Name is required' }, { status: 400 });
     }
+
+    const cardsPerRow = Math.min(Math.max(parseInt(cards_per_row) || 2, 1), 4);
 
     // Get max sort_order
     const maxOrderRow = db.prepare('SELECT MAX(sort_order) as maxOrder FROM blocks').get();
     const nextOrder = (maxOrderRow.maxOrder !== null ? maxOrderRow.maxOrder : -1) + 1;
 
-    const result = db.prepare('INSERT INTO blocks (name, sort_order) VALUES (?, ?)')
-      .run(name, nextOrder);
+    const result = db.prepare('INSERT INTO blocks (name, sort_order, cards_per_row) VALUES (?, ?, ?)')
+      .run(name, nextOrder, cardsPerRow);
 
     const newBlock = {
       id: result.lastInsertRowid,
       name,
       sort_order: nextOrder,
+      cards_per_row: cardsPerRow,
       links: []
     };
 

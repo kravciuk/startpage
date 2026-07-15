@@ -61,12 +61,12 @@ export default function Home() {
   }, []);
 
   // Block operations
-  const handleAddBlock = (name) => {
-    createBlock(name);
+  const handleAddBlock = (name, cardsPerRow) => {
+    createBlock(name, cardsPerRow);
   };
 
-  const handleRenameBlock = (blockId, name) => {
-    updateBlock(blockId, name);
+  const handleRenameBlock = (blockId, name, cardsPerRow) => {
+    updateBlock(blockId, name, cardsPerRow);
   };
 
   const handleDeleteBlock = (blockId) => {

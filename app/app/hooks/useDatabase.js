@@ -24,9 +24,9 @@ export function useDatabase() {
     loadData();
   }, []);
 
-  const createBlock = useCallback(async (name) => {
+  const createBlock = useCallback(async (name, cardsPerRow = 2) => {
     const tempId = 'temp-' + Date.now();
-    
+
     // Optimistic UI update
     setBlocks((prev) => {
       const maxOrder = Math.max(...prev.map((b) => b.sort_order), -1);
@@ -36,6 +36,7 @@ export function useDatabase() {
           id: tempId,
           name,
           sort_order: maxOrder + 1,
+          cards_per_row: cardsPerRow,
           links: [],
         },
       ];
@@ -45,7 +46,7 @@ export function useDatabase() {
       const res = await fetch('/api/blocks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, cards_per_row: cardsPerRow }),
       });
       if (res.ok) {
         const realBlock = await res.json();
@@ -61,14 +62,14 @@ export function useDatabase() {
     }
   }, []);
 
-  const updateBlock = useCallback(async (id, name) => {
-    let originalName = '';
+  const updateBlock = useCallback(async (id, name, cardsPerRow = 2) => {
+    let originalBlock = null;
     // Optimistic UI update
     setBlocks((prev) =>
       prev.map((b) => {
         if (b.id === id) {
-          originalName = b.name;
-          return { ...b, name };
+          originalBlock = { ...b };
+          return { ...b, name, cards_per_row: cardsPerRow };
         }
         return b;
       })
@@ -78,14 +79,14 @@ export function useDatabase() {
       const res = await fetch(`/api/blocks/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, cards_per_row: cardsPerRow }),
       });
       if (!res.ok) throw new Error('API error');
     } catch (error) {
       console.error('Failed to update block:', error);
-      // Revert name
+      // Revert block
       setBlocks((prev) =>
-        prev.map((b) => (b.id === id ? { ...b, name: originalName } : b))
+        prev.map((b) => (b.id === id && originalBlock ? originalBlock : b))
       );
     }
   }, []);

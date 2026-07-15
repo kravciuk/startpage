@@ -26,6 +26,7 @@ db.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     sort_order INTEGER NOT NULL DEFAULT 0,
+    cards_per_row INTEGER NOT NULL DEFAULT 2,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
 
@@ -44,6 +45,12 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_blocks_sort_order ON blocks(sort_order);
   CREATE INDEX IF NOT EXISTS idx_links_sort_order ON links(sort_order);
 `);
+
+// Migration: add cards_per_row if missing
+const blockColumns = db.prepare("PRAGMA table_info(blocks)").all();
+if (!blockColumns.some(col => col.name === 'cards_per_row')) {
+  db.exec("ALTER TABLE blocks ADD COLUMN cards_per_row INTEGER NOT NULL DEFAULT 2");
+}
 
 // Seed default data if database is empty
 const countBlocks = db.prepare('SELECT COUNT(*) as count FROM blocks').get();

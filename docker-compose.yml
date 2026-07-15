@@ -28,6 +28,7 @@ services:
       - "8080:7774"
     volumes:
       - ./data:/app/data
+      - ./app:/app
     environment:
       - NODE_ENV=production
       - DATABASE_DIR=/app/data

@@ -46,7 +46,7 @@ export default function QuickBlock({
       ref={setNodeRef}
       style={style}
       className={cn(
-        'flex flex-col bg-bg-block border border-border-subtle rounded-2xl p-4',
+        'flex flex-col h-full bg-bg-block border border-border-subtle rounded-2xl p-4 overflow-hidden',
         'transition-all duration-200',
         'hover:bg-bg-block-hover hover:border-border-hover hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]',
         isDragging && 'dragging',
@@ -121,13 +121,13 @@ export default function QuickBlock({
       </div>
 
       {/* Links List */}
-      <div className="overflow-y-auto custom-scrollbar">
+      <div className="flex-1 min-h-0 overflow-x-hidden overflow-y-auto custom-scrollbar">
         <SortableContext
           items={block.links.map((l) => `link-${l.id}`)}
           strategy={rectSortingStrategy}
         >
           <div
-            className="grid gap-1.5"
+            className="grid gap-1.5 overflow-hidden w-full"
             style={{ gridTemplateColumns: `repeat(${block.cards_per_row || 2}, 1fr)` }}
           >
             {block.links.map((link) => (
@@ -143,7 +143,7 @@ export default function QuickBlock({
       </div>
 
       {/* Add Link Button */}
-      <div className="mt-3">
+      <div className="mt-auto pt-3">
         <AddLinkButton onClick={() => onAddLink(block.id)} />
       </div>
     </div>

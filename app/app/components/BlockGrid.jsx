@@ -35,9 +35,6 @@ export default function BlockGrid({
   const [activeType, setActiveType] = useState(null);
   const [activeData, setActiveData] = useState(null);
 
-  const blockCount = blocks.length;
-  const desktopCols = Math.min(Math.max(blockCount, 1), 3);
-
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -169,6 +166,13 @@ export default function BlockGrid({
     ? blocks.flatMap((b) => b.links).find((l) => l.id === activeData?.link?.id)
     : null;
 
+  // Split blocks into rows of 3
+  const COLS = 3;
+  const rows = [];
+  for (let i = 0; i < blocks.length; i += COLS) {
+    rows.push(blocks.slice(i, i + COLS));
+  }
+
   return (
     <DndContext
       sensors={sensors}
@@ -181,22 +185,24 @@ export default function BlockGrid({
         items={blocks.map((b) => `block-${b.id}`)}
         strategy={rectSortingStrategy}
       >
-        <div
-          className="grid grid-cols-1 gap-5 blocks-grid"
-          style={{ '--desktop-cols': desktopCols }}
-        >
-          {blocks.map((block) => (
-            <QuickBlock
-              key={block.id}
-              block={block}
-              onEditLink={onEditLink}
-              onDeleteLink={onDeleteLink}
-              onAddLink={onAddLink}
-              onRenameBlock={onRenameBlock}
-              onDeleteBlock={onDeleteBlock}
-            />
+        <div className="flex flex-col gap-5">
+          {rows.map((row, rowIndex) => (
+            <div key={rowIndex} className="flex items-stretch gap-5">
+              {row.map((block) => (
+                <div key={block.id} className="flex-auto min-w-0 flex flex-col">
+                  <QuickBlock
+                    block={block}
+                    onEditLink={onEditLink}
+                    onDeleteLink={onDeleteLink}
+                    onAddLink={onAddLink}
+                    onRenameBlock={onRenameBlock}
+                    onDeleteBlock={onDeleteBlock}
+                  />
+                </div>
+              ))}
+            </div>
           ))}
-          <AddBlockButton onClick={onAddBlock} className="lg:col-span-full" />
+          <AddBlockButton onClick={onAddBlock} />
         </div>
       </SortableContext>
 
